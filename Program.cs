@@ -1,17 +1,11 @@
 ﻿/*@@@@@@@@@@@@@@  MikroTik Auto Backup Application  @@@@@@@@@@@@@@@@
 @@@@@@@@@@@@      Author: Grzegorz Budny                @@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@    Version: 1.0.1       @@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@    Version: 1.0.2       @@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Net;
-using System.Configuration;
-using System.Collections.Specialized;
-using System.Xml;
 using System.Xml.Linq;
 using System.Net.Mail;
 
@@ -19,11 +13,9 @@ namespace backup_mt
 {
     class Program
     {
-
-
         public void backup(string FtpServerAddress, string FtpUserName, string FtpPassword, string FtpFilePath, string DestinationPath, string DestinationFileName, string CfgFilePath, string DestinationCfgName)
         {
-
+        
             FtpWebRequest ftpRequest = (FtpWebRequest)WebRequest.Create("ftp://" + FtpServerAddress);
 
             ftpRequest.Credentials = new NetworkCredential(FtpUserName, FtpPassword);
@@ -57,12 +49,7 @@ namespace backup_mt
 
             try
             {
-                // String smtpServerAddress = ConfigurationManager.AppSettings["smtp_server"];
-                // String senderAddress = ConfigurationManager.AppSettings["sender_name"];
-                // String reciepantAddress = ConfigurationManager.AppSettings["reciepant_name"];
-                // String portNumber = ConfigurationManager.AppSettings["smtp_port"];
-                // String logPath = ConfigurationManager.AppSettings["log_path"];
-
+                
                 XDocument doc = XDocument.Load("Backup_mt.exe.config");
 
                 var smtServerDoc = doc.Descendants("smtp_server");
@@ -89,7 +76,7 @@ namespace backup_mt
                 mail.Attachments.Add(attachment);
                 attachment.Name = "MT Backup " + folderName + ".txt";
 
-                SmtpServer.Port = 587;
+                SmtpServer.Port = Convert.ToInt32(portNumber[0]);
                 //SmtpServer.Credentials = new System.Net.NetworkCredential("username", "password");
                 SmtpServer.EnableSsl = false;
 
@@ -106,9 +93,6 @@ namespace backup_mt
         {
 
             Program MtBackup = new Program();
-
-
-            //String[] test;
 
             //Reading XML file 
             XDocument doc = XDocument.Load("Backup_mt.exe.config");
@@ -131,44 +115,21 @@ namespace backup_mt
 
             }
 
-
-
-
             //Backup folder name 
             DateTime date = DateTime.UtcNow.Date;
             string folderName = date.ToString("dd.MM.yyyy");
             string time = DateTime.Now.ToString("HH:mm:ss tt");
 
-
-            //string user = ConfigurationManager.AppSettings["user"];
-            //string destPath = ConfigurationManager.AppSettings["destination_path"];
-            //string fileName = ConfigurationManager.AppSettings["file_name"];
-            //string logPath = ConfigurationManager.AppSettings["log_path"];
-            //int deviceNumber = Convert.ToInt32(ConfigurationManager.AppSettings["devices_number"]);
-
-            //string destPathDoc = doc.Descendants.ToString("destination_path");
             var fileNameDoc = doc.Descendants("file_name");
             var logPathDoc = doc.Descendants("log_path");
             var destPathDoc = doc.Descendants("destination_path");
             var cfgNameDoc = doc.Descendants("config_name");
-
 
             string[] destPath = XDocument.Load("Backup_mt.exe.config").Descendants("destination_path").Select(x => x.Value).ToArray();
             string[] fileName = XDocument.Load("Backup_mt.exe.config").Descendants("file_name").Select(x => x.Value).ToArray();
             string[] logPath = XDocument.Load("Backup_mt.exe.config").Descendants("log_path").Select(x => x.Value).ToArray();
             string[] cfgName = XDocument.Load("Backup_mt.exe.config").Descendants("config_name").Select(x => x.Value).ToArray();
             // string[] Names = XDocument.Load("Backup_mt.exe.config").Descendants("Name").Select(x => x.Value).ToArray();
-
-
-
-            //Array where are stored all IP addresses
-            // string[] addr = ConfigurationManager.AppSettings["ips"].Split(',');
-            //Array of backup names
-            // string[] names = ConfigurationManager.AppSettings["name"].Split(',');
-            //Array of particular backup user password
-            // string[] pass = ConfigurationManager.AppSettings["pass"].Split(',');
-
-            //Console.WriteLine(dateTime.ToString("dd.MM.yyyy"));
 
             try
             {
@@ -185,7 +146,6 @@ namespace backup_mt
                 Console.WriteLine("The process failed: {0}", e.ToString());
             }
             finally { }
-
 
             for (int i = 0; i < countDevices; i++)
             {
@@ -210,10 +170,7 @@ namespace backup_mt
                 }
             }
 
-
-
             MtBackup.sendEmail();
-
 
         }
 
