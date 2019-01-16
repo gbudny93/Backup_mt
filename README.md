@@ -6,6 +6,8 @@ on XML file. Additional feautre is SMTP capability as well log file generation f
 
 - version 1.0.3 first release 
 
+## Prerequisites
+
 ## Installation 
 
 ## How to use
