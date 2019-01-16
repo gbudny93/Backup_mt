@@ -1,6 +1,6 @@
 ﻿/*@@@@@@@@@@@@@@  MikroTik Auto Backup Application  @@@@@@@@@@@@@@@@
 @@@@@@@@@@@@      Author: Grzegorz Budny                @@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@    Version: 1.0.2       @@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@    Version: 1.0.3       @@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 using System;
 using System.Linq;
@@ -129,7 +129,6 @@ namespace backup_mt
             string[] fileName = XDocument.Load("Backup_mt.exe.config").Descendants("file_name").Select(x => x.Value).ToArray();
             string[] logPath = XDocument.Load("Backup_mt.exe.config").Descendants("log_path").Select(x => x.Value).ToArray();
             string[] cfgName = XDocument.Load("Backup_mt.exe.config").Descendants("config_name").Select(x => x.Value).ToArray();
-            // string[] Names = XDocument.Load("Backup_mt.exe.config").Descendants("Name").Select(x => x.Value).ToArray();
 
             try
             {
