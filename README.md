@@ -4,8 +4,13 @@ on XML file. Additional feautre is SMTP support as well log file generation for 
 
 ## Change log 
 
-- 1/18/2019 v1.0.3 first release 
-
+- 1/18/2019 v1.0.3 first release
+    - .*backup* and *.rsc* files download to centralized location 
+    - folders creation for daily files download to ensure historical view
+    - log files creation for daily files download to ensure historical view
+    - devices and backup parameters stored in *.xml* file
+    - SMTP support on any tcp port with annonymous sender 
+   
 ## Prerequisites
 
 - RouterOS v6.37 or higher 
@@ -29,9 +34,9 @@ on XML file. Additional feautre is SMTP support as well log file generation for 
         - App.config
         - backup_mt.exe
       - Backup
-        - Backup files 
+        - Backup and config file will stored inside, automatically downloaded with today date as name
       - Logs
-        - Log files 
+        - Log files will be stored with today date as name 
 
 ## Deployment
 
