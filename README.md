@@ -13,9 +13,12 @@ on XML file. Additional feautre is SMTP support as well log file generation for 
    
 ## Prerequisites
 
-- RouterOS v6.37 or higher 
-- Windows 7, 8.1, 10, 2008, 2012, 2016 or higher
-- Visual Studio 2012 or higher 
+-  RouterOS v6.37 or higher 
+-  Operating System
+    - [x] Windows 7 or higher
+    - [x] Windows Server 2012 or higher 
+    - [ ] Linux
+-  Visual Studio 2012 or higher 
 
 ## Installation 
 
