@@ -2,6 +2,11 @@
 Backup_mt is a simple C# application that automates RouterOS *.backup* and *.rsc* files download to centralized location based 
 on XML file. Additional feautre is SMTP support as well log file generation for mentioned operations. 
 
+![](https://img.shields.io/badge/coding-c%23-informational.svg)
+![](https://img.shields.io/badge/system-windows%20-blue.svg)
+![](https://img.shields.io/badge/build-passing-success.svg?logo=appveyor)
+![](https://img.shields.io/badge/usage-routeros-orange.svg)
+
 ## Change log 
 
 - 1/18/2019 v1.0.3 first release
