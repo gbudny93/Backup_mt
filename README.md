@@ -6,6 +6,7 @@ on XML file. Additional feautre is SMTP support as well log file generation for 
 ![](https://img.shields.io/badge/system-windows%20-blue.svg)
 ![](https://img.shields.io/badge/build-passing-success.svg?logo=appveyor)
 ![](https://img.shields.io/badge/usage-routeros-orange.svg)
+![](https://img.shields.io/badge/version-1.0.3-blue.svg)
 
 ## Change log 
 
